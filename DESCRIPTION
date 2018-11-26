@@ -1,0 +1,17 @@
+Package: gamer
+Type: Package
+Title: Shiny Games
+Version: 0.1.0
+Author: Anthony Pileggi
+Maintainer: Anthony Pileggi <apileggi20@gmail.com>
+Description: Games built using R/Shiny.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    tibble,
+    dplyr,
+    ggplot2,
+    tweenr,
+    shiny
+RoxygenNote: 6.1.1
