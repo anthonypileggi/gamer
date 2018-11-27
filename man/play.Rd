@@ -4,7 +4,7 @@
 \alias{play}
 \title{Start a shiny game}
 \usage{
-play(game)
+play(game = NULL)
 }
 \arguments{
 \item{game}{which game do you want to play?}
