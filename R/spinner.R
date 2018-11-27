@@ -1,12 +1,17 @@
 
-# Simple spinner animation
-spinner <- function() {
+#' Simple spinner animation
+#' @param groups number of groups
+#' @param nframes number of frames
+#' @param fps frames per second
+#' @export
+spinner <- function(groups = 3, nframes = 100, fps = 10) {
 
   # spinner data (TODO: allow as input for customization)
-  df <- tibble::tibble(name = LETTERS[1:3], freq = rep(1, 3))
+  df <- tibble::tibble(name = LETTERS[1:groups], freq = rep(1, groups))
 
-  dfs <- purrr::map_df(1:nrow(df), ~mutate(df, selected = .x))
-  # TODO: append first state to end so spinner loops!
+  dfs <- purrr::map2_df(c(1:nrow(df), 1), 1:(nrow(df) + 1), ~mutate(df, selected = .x, frame = .y))
+
+  # TODO: how can we link first/last states in polar coordinates?
 
   g <- ggplot(dfs) +
     geom_bar(
@@ -21,7 +26,7 @@ spinner <- function() {
     ) +
     coord_polar() +
     theme_void() +
-    gganimate::transition_states(selected, transition_length = 1, state_length = 0, wrap = FALSE)
+    gganimate::transition_states(frame, transition_length = 1, state_length = 0, wrap = FALSE)
 
-  gganimate::animate(g, nframes = 100, fps = 10)
+  gganimate::animate(g, nframes = nframes, fps = fps)
 }
